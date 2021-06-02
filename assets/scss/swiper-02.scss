@@ -1,0 +1,188 @@
+html,
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 14px;
+	background-color: #f1f1f1;
+}
+
+.container {
+	margin: 0 auto;
+	padding: 0 15px;
+	max-width: 960px + (15 * 2);
+	width: 100%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	&-inner {
+		display: flex;
+		align-items: center;
+		height: 100px;
+	}
+}
+
+#main {
+	&-inner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+	}
+}
+
+.photo-slider {
+	width: 100%;
+
+	// 슬라이더 스타일
+	.swiper-wrapper {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.navigation {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+
+		.arrows {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 7.5px;
+			width: 40px;
+			height: 40px;
+			font-size: 16px;
+			background-color: #fff;
+			border-radius: 40px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+	}
+
+	// 슬라이더 아이템 스타일
+	.item {
+		display: flex;
+		padding: 20px;
+		background-color: #fff;
+	}
+
+	.item-thumb {
+		flex: 0 0 auto;
+		width: 150px;
+		background-size: cover;
+		background-position: center center;
+		border: 1px solid #ddd;
+	}
+
+	.item-data {
+		flex: 1 1 auto;
+		padding-left: 20px;
+		min-width: 0;
+	}
+
+	.item-title {
+		font-size: 20px;
+		font-weight: 700;
+	}
+
+	.item-desc {
+		margin-top: 10px;
+		font-size: 14px;
+		color: #888;
+	}
+
+	.item-date {
+		margin-top: 10px;
+		font-size: 12px;
+		color: #aaa;
+	}
+}
+
+@media all and (min-width: 961px) {
+	.photo-slider {
+		.swiper-wrapper {
+			display: grid;
+			height: 500px;
+			grid-template-rows: 1fr 1fr;
+			grid-template-columns: 2fr 1fr 1fr;
+			grid-gap: 10px;
+			grid-template-areas:
+				"left top1 top2"
+				"left bottom bottom";
+		}
+
+		.navigation {
+			display: none;
+		}
+
+		.item {
+			height: 100%;
+		}
+
+		.slide01 {
+			grid-area: left;
+
+			.item {
+				flex-direction: column;
+			}
+
+			.item-thumb {
+				width: 100%;
+				height: 200px;
+			}
+
+			.item-data {
+				padding-top: 20px;
+				padding-left: 0;
+			}
+		}
+
+		.slide02 {
+			grid-area: top1;
+
+			.item-thumb {
+				width: 100%;
+				height: 100%;
+			}
+
+			.item-data {
+				display: none;
+			}
+		}
+
+		.slide03 {
+			grid-area: top2;
+
+			.item-thumb {
+				width: 100%;
+				height: 100%;
+			}
+
+			.item-data {
+				display: none;
+			}
+		}
+
+		.slide04 {
+			grid-area: bottom;
+
+			.item-thumb {
+				width: 100%;
+				height: 100%;
+			}
+
+			.item-data {
+				display: none;
+			}
+		}
+	}
+}

@@ -5,7 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>슬라이더 01 - 헤더 컬러 변경</title>
+	<title>Swiper 01</title>
+
+	<!-- fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 	<!-- vendor -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -17,57 +21,55 @@
 </head>
 
 <body>
-
 	<div id="wrap">
-
-		<header id="header" class="a">
+		<header id="header" class="test">
 			<div class="container">
 				<div id="header-inner">
-					<h1 class="tit">슬라이더 01 - 헤더 컬러 변경</h1>
+					<h1 class="title">슬라이더 01 - 헤더 컬러 변경</h1>
 				</div>
 			</div>
 		</header>
 
 		<main id="main">
 			<div class="swiper-container">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide" data-header-type="light">slider 01</div>
-					<div class="swiper-slide" data-header-type="dark">slider 02</div>
-					<div class="swiper-slide" data-header-type="light">slider 03</div>
-					<div class="swiper-slide" data-header-type="dark">slider 04</div>
-					<div class="swiper-slide" data-header-type="light">slider 05</div>
-				</div>
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide slide01 black" data-header-type="light">black slider 01</li>
+					<li class="swiper-slide slide02 gray"  data-header-type="dark">gray slider 01</li>
+					<li class="swiper-slide slide03 black" data-header-type="light">black slider 02</li>
+					<li class="swiper-slide slide04 gray"  data-header-type="dark">gray slider 02</li>
+					<li class="swiper-slide slide05 black" data-header-type="light">black slider 03</li>
+					<li class="swiper-slide slide06 gray"  data-header-type="dark">gray slider 03</li>
+				</ul>
 			</div>
 		</main>
-
 	</div>
 
 	<script>
-		const header = document.querySelector('#header');
-		let headerOldClass; // a
+		// 익명함수 생성
+		(function() {
+			let headerClass;
+			const header = document.querySelector('#header');
+			const changeHeaderAction = function(slider) {
+				let activeSlider = slider.slides[slider.activeIndex];
+				let getType = activeSlider.dataset['headerType'];
 
-		function changeHeaderColor(slider) {
-			let activeSlider = slider.slides[ slider.activeIndex ];
-			let headerClass = activeSlider.dataset.headerType;
-
-			// const header = document.querySelector('#header');
-			header.removeAttribute('class');
-			header.classList.add( headerOldClass, headerClass );
-		}
-
-		const mainSlider = new Swiper('.swiper-container', {
-			slidesPerView: 1,
-			on: {
-				init: function(swiper) {
-					headerOldClass = header.className; // a
-
-					changeHeaderColor(swiper);
-				},
-				slideChange: function(swiper) {
-					changeHeaderColor(swiper);
-				}
+				header.removeAttribute('class');
+				header.classList.add(headerClass, getType);
 			}
-		});
+
+			const swiperSlider = new Swiper('.swiper-container', {
+				slidesPerView: 1,
+				on: {
+					init: function(swiper) {
+						headerClass = header.className;
+						changeHeaderAction(swiper);
+					},
+					slideChange: function(swiper) {
+						changeHeaderAction(swiper);
+					}
+				}
+			});
+		})();
 	</script>
 </body>
 </html>

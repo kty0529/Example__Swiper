@@ -1,16 +1,21 @@
 {
-	"liveServer.settings.port": 5501,
-
-	// SASS
 	"liveSassCompile.settings.formats": [
 		{
-			"format": "expanded",
 			"extensionName": ".min.css",
+			"format": "compressed",
 			"savePath": "~/../css"
 		}
 	],
-	"liveSassCompile.settings.excludeList": ["/**/node_modules/**", "/.vscode/**"],
-	"liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions", "ie 10"],
+	"liveSassCompile.settings.excludeList": [
+		"**/node_modules/**",
+		".vscode/**"
+	],
+	"liveSassCompile.settings.generateMap": true,
+	"liveSassCompile.settings.autoprefix": [
+		"> 1%",
+		"last 2 versions",
+		"IE 10"
+	],
 
 	// compile 시 error 일 때만 출력 창 띄우기
 	"liveSassCompile.settings.showOutputWindowOn": "Error",
