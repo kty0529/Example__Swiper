@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Swiper 03</title>
+
+	<!-- fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+	<!-- vendor -->
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+	<!-- css -->
+	<link rel="stylesheet" href="./assets/css/reset.min.css">
+	<link rel="stylesheet" href="./assets/css/swiper-03.min.css">
+</head>
+
+<body>
+	<div id="wrap">
+
+		<header id="header">
+			<div class="container">
+				<div id="header-inner">
+					<h1 class="title">슬라이더 03 - 2개 슬라이더 동시 제어, 외부에서 슬라이더 제어하기</h1>
+				</div>
+			</div>
+		</header>
+
+		<main id="main">
+			<div class="container">
+				<div id="main-inner">
+
+					<h2>부모 슬라이더</h2>
+					<br>
+					<div class="parent-slider">
+						<div class="swiper-container">
+							<ul class="swiper-wrapper">
+								<li class="swiper-slide" data-parent-num="0"></li>
+								<li class="swiper-slide" data-parent-num="1"></li>
+								<li class="swiper-slide" data-parent-num="2"></li>
+								<li class="swiper-slide" data-parent-num="3"></li>
+								<li class="swiper-slide" data-parent-num="4"></li>
+								<li class="swiper-slide" data-parent-num="5"></li>
+								<li class="swiper-slide" data-parent-num="6"></li>
+								<li class="swiper-slide" data-parent-num="7"></li>
+								<li class="swiper-slide" data-parent-num="8"></li>
+								<li class="swiper-slide" data-parent-num="9"></li>
+							</ul>
+						</div>
+					</div>
+
+					<br><br><br>
+
+					<h2>자식 슬라이더</h2>
+					<br>
+					<div class="child-slider">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" data-child-num="0" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="1" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="2" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="3" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="4" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="5" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="6" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="7" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="8" style="background-image: url('https://source.unsplash.com/random');"></div>
+								<div class="swiper-slide" data-child-num="9" style="background-image: url('https://source.unsplash.com/random');"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="action-buttons">
+						<div class="comm parent-buttons">
+							<div class="tit">외부버튼 1</div>
+
+							<button id="parent-next" class="btn" type="button">부모 슬라이더 다음장으로 이동</button>
+							<button id="parent-prev" class="btn" type="button">부모 슬라이더 이전장으로 이동</button>
+						</div>
+
+						<div class="comm child-buttons">
+							<div class="tit">외부버튼 2</div>
+
+							<button id="child-next" class="btn" type="button">자식 슬라이더 다음장으로 이동</button>
+							<button id="child-prev" class="btn" type="button">자식 슬라이더 이전장으로 이동</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</main>
+
+	</div>
+
+	<script>
+		(function() {
+			// 썸네일로 활용될 자식 슬라이더 먼저 선언
+			const childSlider = new Swiper('.child-slider .swiper-container', {
+				loopedSlides: 5,
+				slidesPerView: 5,
+				spaceBetween: 10,
+				watchSlidesVisibility: true,
+				watchSlidesProgress: true
+			});
+
+			// 부모 슬라이더 선언
+			const parentSlider = new Swiper('.parent-slider .swiper-container', {
+				loopedSlides: 5,
+				spaceBetween: 10,
+				thumbs: {
+					swiper: childSlider
+				}
+			});
+
+			// 부모 슬라이더 제어
+			document.querySelector('#parent-next').addEventListener('click', function(e) {
+				e.preventDefault(); // 기본 button의 click 이벤트 제거
+				parentSlider.slideNext(); // swiper의 slideNext() 메서드 실행
+			});
+
+			document.querySelector('#parent-prev').addEventListener('click', function(e) {
+				e.preventDefault();
+				parentSlider.slidePrev(); // swiper의 slidePrev() 메서드 실행
+			});
+
+			// 자식 슬라이더 제어
+			document.querySelector('#child-next').addEventListener('click', function(e) {
+				e.preventDefault();
+				childSlider.slideNext();
+			});
+
+			document.querySelector('#child-prev').addEventListener('click', function(e) {
+				e.preventDefault();
+				childSlider.slidePrev();
+			});
+		})();
+	</script>
+</body>
+</html>
