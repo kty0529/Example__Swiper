@@ -103,14 +103,17 @@
 
 	<script>
 
-		(function() {
+		(function() { // 익명함수
+
 			const RESPONSIVE_SLIDER = {
-				slider: undefined,
+				slider: undefined, // undefined
 				init: function() {
-					const dom_width = document.body.offsetWidth;
+					const dom_width = document.body.offsetWidth; // 900
 					const tbl_width = 960;
 
 					if ( dom_width <= tbl_width && this.slider == undefined ) {
+						// swiper가 활성화 되지 않은 상태
+
 						this.slider = new Swiper('.photo-slider .swiper-container', {
 							slidesPerView: 1,
 							navigation: {
@@ -120,6 +123,8 @@
 						});
 
 					} else if ( dom_width > tbl_width && this.slider !== undefined ) {
+						// 현재 swiper 활성화 된 상태
+
 						this.slider.destroy(true, true);
 						this.slider = undefined;
 					} else {
